@@ -4,8 +4,8 @@ clear
 echo ""
 echo "====================================================================="
 echo "|                                                                   |"
-echo "|    full-stack-nginx-wordpress-for-everyone-with-docker-compose    |"
-echo "|                     by Erdal ALTIN                                |"
+echo "|    full-stack-nginx-wordpress-with-docker-compose                 |"
+echo "|                     by R3vela710n                                 |"
 echo "|                                                                   |"
 echo "====================================================================="
 sleep 2
@@ -23,8 +23,8 @@ echo "============================================"
 sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg lsb-release
 sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(grep -Po 'UBUNTU_CODENAME=\K[^;]*' /etc/os-release) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(grep -Po 'UBUNTU_CODENAME=\K[^;]*' /etc/os-release) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 
 Installed=`sudo apt-cache policy docker-ce | sed -n '2p' | cut -c 14-`
@@ -67,13 +67,13 @@ echo "============================================"
 echo ""
 echo ""
 echo "============================================"
-echo "| Installing Docker Compose v2.12.2..."
+echo "| Installing Docker Compose v2.20.3..."
 echo "============================================"
 echo ""
 sleep 2
 
 sudo mkdir -p /usr/local/lib/docker/cli-plugins
-sudo curl -SL "https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/lib/docker/cli-plugins/docker-compose
+sudo curl -SL "https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/lib/docker/cli-plugins/docker-compose
 sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
 # permission for Docker daemon socket
