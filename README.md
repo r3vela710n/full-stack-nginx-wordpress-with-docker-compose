@@ -57,7 +57,7 @@ git clone https://github.com/r3vela710n/full-stack-nginx-wordpress-with-docker-c
 Open a terminal and `cd` to the folder in which `docker-compose.yml` is saved and run:
 
 ```
-cd full-stack-nginx-wordpress-for-everyone-with-docker-compose
+cd full-stack-nginx-wordpress-with-docker-compose
 chmod +x install.sh
 ./install.sh
 ```
