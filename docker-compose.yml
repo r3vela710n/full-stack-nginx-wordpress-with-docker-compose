@@ -93,8 +93,8 @@ services:
     #         trap exit TERM; while :; do certbot renew --dry-run; sleep 12h & wait $${!}; done;"
     
     phpmyadmin:
-        depends_on:
-            - certbot
+        # depends_on:
+        #     - certbot
         image: phpmyadmin:latest
         container_name: phpmyadmin
         networks:

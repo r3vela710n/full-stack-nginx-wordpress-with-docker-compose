@@ -254,11 +254,11 @@ if [ -x "$(command -v docker)" ] && [ "$(docker compose version)" ]; then
 			echo "Error! could not installed portainer" >&2
 			exit 1
 		else
-			echo ""
-			until [ -n "$(sudo find ./certbot/live -name '$domain_name' 2>/dev/null | head -1)" ]; do
-				echo "waiting for Let's Encrypt certificates for $domain_name"
-				sleep 5s & wait ${!}
-				if sudo [ -d "./certbot/live/$domain_name" ]; then break; fi
+			# echo ""
+			# until [ -n "$(sudo find ./certbot/live -name '$domain_name' 2>/dev/null | head -1)" ]; do
+			# 	echo "waiting for Let's Encrypt certificates for $domain_name"
+			# 	sleep 5s & wait ${!}
+			# 	if sudo [ -d "./certbot/live/$domain_name" ]; then break; fi
 			done
 			echo "Ok."
 			#until [ ! -z `docker compose ps -a --filter "status=running" --services | grep webserver` ]; do
