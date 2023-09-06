@@ -4,7 +4,7 @@ clear
 echo ""
 echo "====================================================================="
 echo "|                                                                   |"
-echo "|    full-stack-nginx-wordpress-with-docker-compose                 |"
+echo "|    Full-Stack-Nginx-Wordpress-with-Docker-Compose                 |"
 echo "|                     by R3vela710n                                 |"
 echo "|                                                                   |"
 echo "====================================================================="
