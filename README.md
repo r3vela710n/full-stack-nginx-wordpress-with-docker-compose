@@ -45,7 +45,7 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 	- [phpMyAdmin](#phpmyadmin)
 	- [backup](#backup)
 
-## Requirements for either way you chose
+## Requirements regardless of installation method
 
 Make sure you have the latest versions of **Docker** and **Docker Compose** installed on your machine.
 
