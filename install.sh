@@ -199,8 +199,8 @@ done
 echo "Ok."
 
 local_timezone_regex="^[a-zA-Z0-9/+-_]{1,}$"
-read -p 'Enter container local Timezone(default : America/Los_Angeles, to see the other timezones, https://docs.diladele.com/docker/timezones.html): ' local_timezone
-: ${local_timezone:=America/Los_Angeles}
+read -p 'Enter container local Timezone(default : America/New_York, to see the other timezones, https://docs.diladele.com/docker/timezones.html): ' local_timezone
+: ${local_timezone:=America/New_York}
 while [[ ! $local_timezone =~ $local_timezone_regex ]]
 do
 	echo "Try again (can only contain numerals 0-9, basic Latin letters, both lowercase and uppercase, positive, minus sign and underscore)"
