@@ -45,6 +45,17 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 	- [phpMyAdmin](#phpmyadmin)
 	- [backup](#backup)
 
+## Requirements for either way you chose
+
+Make sure you have the latest versions of **Docker** and **Docker Compose** installed on your machine.
+
+- [How install docker](https://docs.docker.com/engine/install/)
+- [How install docker compose](https://docs.docker.com/compose/install/)
+
+Clone this repository or copy the files from this repository into a new folder. In the **docker-compose.yml** file you may change the database from MariaDB to MySQL.
+
+Make sure to [add your user to the `docker` group](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
+
 ## Automatic
 
 ### Exec install shell script for auto installation and configuration
@@ -61,17 +72,6 @@ cd full-stack-nginx-wordpress-with-docker-compose
 chmod +x install.sh
 ./install.sh
 ```
-
-## Requirements
-
-Make sure you have the latest versions of **Docker** and **Docker Compose** installed on your machine.
-
-- [How install docker](https://docs.docker.com/engine/install/)
-- [How install docker compose](https://docs.docker.com/compose/install/)
-
-Clone this repository or copy the files from this repository into a new folder. In the **docker-compose.yml** file you may change the database from MariaDB to MySQL.
-
-Make sure to [add your user to the `docker` group](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
 
 ## Manual
 		 
