@@ -95,7 +95,7 @@ services:
     phpmyadmin:
         depends_on:
             - certbot
-        image: phpmyadmin/phpmyadmin
+        image: phpmyadmin:latest
         container_name: phpmyadmin
         networks:
             - backend
