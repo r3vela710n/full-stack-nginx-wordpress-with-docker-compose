@@ -259,7 +259,7 @@ if [ -x "$(command -v docker)" ] && [ "$(docker compose version)" ]; then
 			# 	echo "waiting for Let's Encrypt certificates for $domain_name"
 			# 	sleep 5s & wait ${!}
 			# 	if sudo [ -d "./certbot/live/$domain_name" ]; then break; fi
-			done
+			# ßdone
 			echo "Ok."
 			#until [ ! -z `docker compose ps -a --filter "status=running" --services | grep webserver` ]; do
 			#	echo "waiting starting webserver container"
