@@ -53,13 +53,13 @@ services:
             - type: bind
               source: ./webserver/templates/nginx.conf.template
               target: '${NGINX_PREFIX}/templates/default.conf.template'
-            - type: bind
-              source: ./webserver/ssl-option/options-ssl-nginx.conf
-              target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-nginx.conf'
-            - type: bind
-              source: ./ssl-conf.sh
-              target: '/tmp/ssl-conf.sh'
-            - 'certbot-etc:${LETSENCRYPT_CONF_PREFIX}'
+            # - type: bind
+            #   source: ./webserver/ssl-option/options-ssl-nginx.conf
+            #   target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-nginx.conf'
+            # - type: bind
+            #   source: ./ssl-conf.sh
+            #   target: '/tmp/ssl-conf.sh'
+            # - 'certbot-etc:${LETSENCRYPT_CONF_PREFIX}'
             - '/tmp/acme-challenge:/tmp/acme-challenge'
         hostname: webserver
         restart: unless-stopped
@@ -75,48 +75,48 @@ services:
             TZ: '${LOCAL_TIMEZONE}'            
         command: bash -c "/docker-entrypoint.sh nginx -v; sh /tmp/ssl-conf.sh '${DOMAIN_NAME}' '${LETSENCRYPT_CONF_PREFIX}' '${NGINX_PREFIX}'"
     
-    certbot:
-        depends_on:
-            - webserver
-        image: certbot/certbot
-        container_name: certbot
-        networks:
-            - backend
-        volumes:
-            - 'certbot-etc:${LETSENCRYPT_CONF_PREFIX}'
-            - 'certbot-var:/var/lib/letsencrypt'
-            - '/tmp/acme-challenge:/tmp/acme-challenge'                        
-        restart: unless-stopped        
-        environment:
-            TZ: '${LOCAL_TIMEZONE}'
-        entrypoint: /bin/sh -c "certbot certonly --webroot --webroot-path /tmp/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email ${LETSENCRYPT_EMAIL} -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}; 
-            trap exit TERM; while :; do certbot renew --dry-run; sleep 12h & wait $${!}; done;"
+    # certbot:
+    #     depends_on:
+    #         - webserver
+    #     image: certbot/certbot
+    #     container_name: certbot
+    #     networks:
+    #         - backend
+    #     volumes:
+    #         - 'certbot-etc:${LETSENCRYPT_CONF_PREFIX}'
+    #         - 'certbot-var:/var/lib/letsencrypt'
+    #         - '/tmp/acme-challenge:/tmp/acme-challenge'                        
+    #     restart: unless-stopped        
+    #     environment:
+    #         TZ: '${LOCAL_TIMEZONE}'
+    #     entrypoint: /bin/sh -c "certbot certonly --webroot --webroot-path /tmp/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email ${LETSENCRYPT_EMAIL} -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}; 
+    #         trap exit TERM; while :; do certbot renew --dry-run; sleep 12h & wait $${!}; done;"
     
     phpmyadmin:
         depends_on:
             - certbot
-        image: phpmyadmin/phpmyadmin
+        image: phpmyadmin:latest
         container_name: phpmyadmin
         networks:
             - backend
             - frontend
         volumes:
-            - type: bind
-              source: ./phpmyadmin/apache2/sites-available/default-ssl.conf
-              target: '${APACHE_CONFDIR_PREFIX}/sites-available/default-ssl.conf'            
+            # - type: bind
+            #   source: ./phpmyadmin/apache2/sites-available/default-ssl.conf
+            #   target: '${APACHE_CONFDIR_PREFIX}/sites-available/default-ssl.conf'            
             - type: bind
               source: ./phpmyadmin/apache2/ports.conf
               target: '${APACHE_CONFDIR_PREFIX}/ports.conf'
-            - type: bind
-              source: ./phpmyadmin/ssl-option/options-ssl-apache.conf
-              target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-apache.conf'
+            # - type: bind
+            #   source: ./phpmyadmin/ssl-option/options-ssl-apache.conf
+            #   target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-apache.conf'
             - type: bind
               source: ./phpmyadmin/config.user.inc.php
               target: '${PMA_CONF_FOLDER}/config.user.inc.php'
             - type: bind
               source: ./phpmyadmin/php/conf.d/security.ini
               target: '${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini'
-            - 'certbot-etc:${LETSENCRYPT_CONF_PREFIX}'
+            # - 'certbot-etc:${LETSENCRYPT_CONF_PREFIX}'
         hostname: phpmyadmin
         restart: unless-stopped
         ports:
@@ -257,7 +257,7 @@ volumes:
             o: bind
     dtredis:
         name: redis-data
-    certbot-etc:
-        external: true        
-    certbot-var:
-        name: certbot-var
+    # certbot-etc:
+    #     external: true        
+    # certbot-var:
+    #     name: certbot-var

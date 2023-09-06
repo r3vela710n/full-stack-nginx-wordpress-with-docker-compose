@@ -7,8 +7,8 @@ upstream docker_varnish  {
 }
 
 map $scheme $proxy_x_forwarded_ssl {
-	default off;
-	https on;
+	default on;
+	https off;
 }
 
 server {
@@ -17,8 +17,8 @@ server {
 	#
 	server_name ${NGINX_HOST} www.${NGINX_HOST};
 	#
-	location ~ ^/.well-known/acme-challenge/ {
-		root /tmp/acme-challenge;
+#	location ~ ^/.well-known/acme-challenge/ {
+#		root /tmp/acme-challenge;
 	}
 	#
 	#location / {
