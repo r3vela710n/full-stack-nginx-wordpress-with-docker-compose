@@ -98,31 +98,31 @@ echo "============================================"
 echo ""
 sleep 2
 
-# set your domain name
-domain_name=""
-read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
-[ -z $domain_name ] && domain_name="NULL"
-host -N 0 $domain_name 2>&1 > /dev/null
-while [ $? -ne 0 ]
-do
-	echo "Try again"
-	read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
-	[ -z $domain_name ] && domain_name="NULL"
-	host -N 0 $domain_name 2>&1 > /dev/null
-done
-echo "Ok."
+# # set your domain name
+# domain_name=""
+# read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
+# [ -z $domain_name ] && domain_name="NULL"
+# host -N 0 $domain_name 2>&1 > /dev/null
+# while [ $? -ne 0 ]
+# do
+# 	echo "Try again"
+# 	read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
+# 	[ -z $domain_name ] && domain_name="NULL"
+# 	host -N 0 $domain_name 2>&1 > /dev/null
+# done
+# echo "Ok."
 
-# set parameters in env.example file
-email=""
-regex="^[a-zA-Z0-9\._-]+\@[a-zA-Z0-9._-]+\.[a-zA-Z]+\$"
-read -p 'Enter Email Address for letsencrypt ssl(e.g. : email@domain.com): ' email
-while [ -z $email ] || [[ ! $email =~ $regex ]]
-do
-	echo "Try again"
-	read -p 'Enter Email Address for letsencrypt ssl(e.g. : email@domain.com): ' email
-	sleep 1
-done
-echo "Ok."
+# # set parameters in env.example file
+# email=""
+# regex="^[a-zA-Z0-9\._-]+\@[a-zA-Z0-9._-]+\.[a-zA-Z]+\$"
+# read -p 'Enter Email Address for letsencrypt ssl(e.g. : email@domain.com): ' email
+# while [ -z $email ] || [[ ! $email =~ $regex ]]
+# do
+# 	echo "Try again"
+# 	read -p 'Enter Email Address for letsencrypt ssl(e.g. : email@domain.com): ' email
+# 	sleep 1
+# done
+# echo "Ok."
 
 db_username=""
 db_regex="^[0-9a-zA-Z\$_]{6,}$"
@@ -218,13 +218,13 @@ case "$choice" in
   * ) echo "Invalid input! Aborting now..."; exit 0;;
 esac
 
-cp ./phpmyadmin/apache2/sites-available/default-ssl.sample.conf ./phpmyadmin/apache2/sites-available/default-ssl.conf
-sed -i 's/example.com/'$domain_name'/g' ./phpmyadmin/apache2/sites-available/default-ssl.conf
+# cp ./phpmyadmin/apache2/sites-available/default-ssl.sample.conf ./phpmyadmin/apache2/sites-available/default-ssl.conf
+# sed -i 's/example.com/'$domain_name'/g' ./phpmyadmin/apache2/sites-available/default-ssl.conf
 
 cp env.example .env
 
-sed -i 's/example.com/'$domain_name'/' .env
-sed -i 's/email@domain.com/'$email'/' .env
+# sed -i 's/example.com/'$domain_name'/' .env
+# sed -i 's/email@domain.com/'$email'/' .env
 sed -i 's/db_username/'$db_username'/g' .env
 sed -i 's/db_password/'$db_password'/g' .env
 sed -i 's/db_name/'$db_name'/' .env
@@ -236,8 +236,8 @@ sed -i "s@directory_path@$(pwd)@" .env
 sed -i 's/local_timezone/'$local_timezone'/' .env
 
 if [ -x "$(command -v docker)" ] && [ "$(docker compose version)" ]; then
-    # Firstly: create external volume
-	docker volume create --driver local --opt type=none --opt device=`pwd`/certbot --opt o=bind certbot-etc > /dev/null
+    # # Firstly: create external volume
+	# docker volume create --driver local --opt type=none --opt device=`pwd`/certbot --opt o=bind certbot-etc > /dev/null
 	# installing WordPress and the other services
 	docker compose up -d & export pid=$!
 	echo "WordPress and the other services installing proceeding..."
